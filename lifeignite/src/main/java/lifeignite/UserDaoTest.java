@@ -1,10 +1,8 @@
 package lifeignite;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import user.DaoFactory;
+import org.springframework.context.support.GenericXmlApplicationContext;
 import user.User;
 import user.UserDao;
 
@@ -14,7 +12,7 @@ import java.sql.SQLException;
 public class UserDaoTest {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException{
-		ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
 
 		UserDao dao = context.getBean("userDao", UserDao.class);
 
