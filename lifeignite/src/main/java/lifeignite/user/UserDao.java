@@ -1,4 +1,4 @@
-package user;
+package lifeignite.user;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

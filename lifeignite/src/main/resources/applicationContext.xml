@@ -9,7 +9,7 @@
         <property name="username" value="lifeignite"/>
         <property name="password" value="My_life_for_aiur!123"/>
     </bean>
-    <bean id="userDao" class="user.UserDao">
+    <bean id="userDao" class="lifeignite.user.UserDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 </beans>
