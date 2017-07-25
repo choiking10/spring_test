@@ -5,21 +5,27 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.SQLException;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="/applicationContext.xml")
 public class UserDaoTest {
+	@Autowired
+	private ApplicationContext context;
+	@Autowired
 	private UserDao dao;
 	private User[] users;
 
 	@Before
 	public void setUp(){
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-		dao = context.getBean("userDao", UserDao.class);
-
 		users = new User[3];
 		users[0] = new User("mama","moo","myname");
 		users[1] = new User("girl","friend","is");
@@ -28,7 +34,6 @@ public class UserDaoTest {
 	}
 	@Test
 	public void addAndGet() throws ClassNotFoundException, SQLException{
-
 		dao.deleteAll();
 		assertThat(dao.getCount(), is(0));
 
@@ -49,9 +54,6 @@ public class UserDaoTest {
 
 	@Test(expected = EmptyResultDataAccessException.class)
 	public void getUserFailure() throws SQLException, ClassNotFoundException{
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-
-		UserDao dao = context.getBean("userDao",UserDao.class);
 
 		dao.deleteAll();
 		assertThat(dao.getCount(),is(0));
