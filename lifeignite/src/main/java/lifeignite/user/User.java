@@ -1,8 +1,5 @@
 package lifeignite.user;
 
-/**
- * Created by yunho on 2017. 7. 24..
- */
 public class User {
     String id;
     String name;

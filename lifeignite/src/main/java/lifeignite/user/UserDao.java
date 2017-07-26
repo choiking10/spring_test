@@ -7,9 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by yunho on 2017. 7. 24..
- */
 public class UserDao {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
