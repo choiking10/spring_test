@@ -1,4 +1,7 @@
 package lifeignite.user;
+import com.mysql.jdbc.MysqlErrorNumbers;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -29,10 +32,15 @@ public class UserDao {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void add(final User user) throws SQLException{
+public void add(final User user) throws DuplicateUserIdException{
+    try {
         jdbcTemplate.update("insert into users(id, name, password) values(?,?,?)",
                 user.getId(), user.getName(), user.getPassword());
     }
+    catch(DuplicateKeyException e){
+        throw new DuplicateUserIdException(e);
+    }
+}
     public User get(String id) throws SQLException{
         return this.jdbcTemplate.queryForObject(
                 "select * from users where id = ?", new Object[]{id}, userRowMapper);
